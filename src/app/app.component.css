@@ -24,3 +24,9 @@ footer {
   padding: 1rem;
   border-top: 1px solid #ddd;
 }
+/* src/app/app.component.css */
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}

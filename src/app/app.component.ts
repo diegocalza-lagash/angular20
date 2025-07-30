@@ -11,9 +11,7 @@ import { SharedMaterialModule } from './shared-material.module';
     RouterModule,
     SharedMaterialModule
   ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.css']
 })
-export class AppComponent {
-  title = 'mi-aplicacion';
-}
+export class AppComponent {}
