@@ -11,13 +11,15 @@ export const routes: Routes = [
     path: 'login', 
     component: LoginComponent,
     canActivate: [() => {
+      // This is a simple synchronous check that doesn't require injection
       if (typeof window === 'undefined') {
         return true;
       }
       
       const token = localStorage.getItem('auth_token');
       if (token) {
-        window.location.href = '/dashboard';
+        // Use a timeout to avoid potential change detection issues
+        setTimeout(() => window.location.href = '/dashboard', 0);
         return false;
       }
       return true;
@@ -31,6 +33,10 @@ export const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'users/new', component: UserFormComponent },
       { path: 'users/edit/:id', component: UserFormComponent },
+      { 
+        path: 'products', 
+        loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule)
+      },
       { path: '', redirectTo: 'users', pathMatch: 'full' }
     ]
   },

@@ -1,0 +1,53 @@
+<!-- product-detail.component.html -->
+<div class="detail-container" *ngIf="product; else loading">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <div class="detail-grid">
+          <div class="detail-row">
+            <span class="detail-label">Descripción:</span>
+            <span class="detail-value">{{ product.description }}</span>
+          </div>
+  
+          <div class="detail-row">
+            <span class="detail-label">Precio:</span>
+            <span class="detail-value">{{ product.price | currency }}</span>
+          </div>
+  
+          <div class="detail-row">
+            <span class="detail-label">Stock:</span>
+            <span class="detail-value" [class.low-stock]="product.stock <= 5">
+              {{ product.stock }} unidades
+            </span>
+          </div>
+  
+          <div class="detail-row" *ngIf="product.createdAt">
+            <span class="detail-label">Creado:</span>
+            <span class="detail-value">{{ product.createdAt | date:'medium' }}</span>
+          </div>
+  
+          <div class="detail-row" *ngIf="product.updatedAt">
+            <span class="detail-label">Última actualización:</span>
+            <span class="detail-value">{{ product.updatedAt | date:'medium' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+  
+      <mat-card-actions>
+        <button mat-button (click)="navigateToProducts()">Volver</button>
+        <button mat-button color="primary" (click)="editProduct()">Editar</button>
+        <button mat-button color="warn" (click)="deleteProduct()">Eliminar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+  <ng-template #loading>
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Cargando producto...</p>
+    </div>
+  </ng-template>
